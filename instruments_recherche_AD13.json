@@ -1,0 +1,502 @@
+{
+  "metadata": {
+    "source": "https://www.archives13.fr",
+    "url_moteur_recherche": "https://www.archives13.fr/archive/recherche/fonds/n:93",
+    "url_presentation_fonds": "https://www.archives13.fr/n/presentation-des-fonds-d-archives/n:94",
+    "lastUpdate": "2026-03-26",
+    "description": "Cartographie des instruments de recherche des Archives départementales des Bouches-du-Rhône (AD13)",
+    "auteur": "Generated from AD13 website exploration",
+    "notes": "Cette cartographie recense les instruments de recherche disponibles sur le site des AD13, organisés par série du cadre de classement et par thématique pour la série W"
+  },
+  "cadre_classement": {
+    "description": "Le cadre de classement des archives départementales organize les fonds selon leur nature et provenance. Les séries principales sont: A-Z pour les archives publiques, J pour les archives privées, HD pour les archives hospitalières déposées, E/ETP pour les archives notariales et établissements publics, Fi pour les fonds iconographiques.",
+    "series": {
+      "A": {
+        "intitule": "Actes du pouvoir souverain",
+        "description": "Actes émanant du pouvoir royal et impérial : ordonnances, édits, déclarations, lettres patentes, brevets.",
+        "periode": "Ancien Régime",
+        "instruments": []
+      },
+      "B": {
+        "intitule": "Cours et juridictions",
+        "description": "Parlement de Provence, Cour des Comptes, Juridictions royales (sénéchaussées, bailliages).",
+        "periode": "Ancien Régime",
+        "instruments": [
+          {"cote": "B", "description": "Parlement de Provence", "producteur": "Parlement de Provence"},
+          {"cote": "B", "description": "Cour des Comptes", "producteur": "Cour des Comptes"}
+        ]
+      },
+      "C": {
+        "intitule": "Administrationsprovinciales",
+        "description": "Etats de Provence, Intendance de Provence, Bureaux des finances.",
+        "periode": "Ancien Régime",
+        "instruments": [
+          {"cote": "C", "description": "Etats de Provence", "producteur": "Etats de Provence"},
+          {"cote": "C", "description": "Intendance de Provence", "producteur": "Intendance de Provence"}
+        ]
+      },
+      "D": {
+        "intitule": "Instruction publique, sciences, arts et bibliothèques",
+        "description": "Documents relatifs à l'enseignement, aux académies, bibliothèques, sociétés savantes.",
+        "periode": "Ancien Régime",
+        "instruments": []
+      },
+      "E": {
+        "intitule": "Juridictions royales spéciales et corporatives",
+        "description": "Juridiction de l'intendance des galères, intendance sanitaire, jurandes et guildes,énéchanciers, notaires et tabellions.",
+        "periode": "Ancien Régime",
+        "instruments": [
+          {"cote": "E", "description": "Juridiction de l'intendance des galères", "producteur": "Intendance des galères"},
+          {"cote": "E", "description": "Jurandes et guildes", "producteur": "Corporations"},
+          {"cote": "E", "description": "Notaires et tabellions", "producteur": "Notaires"}
+        ]
+      },
+      "G": {
+        "intitule": "Clergé séculier",
+        "description": "Actes des évêqués,abbés, chapitres,cures, fabriques, diocèses,Officialités.",
+        "periode": "Ancien Régime",
+        "instruments": []
+      },
+      "H": {
+        "intitule": "Clergé régulier",
+        "description": "Abbayes, prieurés, couvents, ordres religieux (Saint-Victor, Ordre de Malte, Carmes, Cordeliers, etc.).",
+        "periode": "Ancien Régime",
+        "instruments": [
+          {"cote": "H", "description": "Abbaye de Saint-Victor", "producteur": "Abbaye de Saint-Victor"},
+          {"cote": "H", "description": "Ordre de Malte", "producteur": "Ordre de Malte"}
+        ]
+      },
+      "J": {
+        "intitule": "Archives privées",
+        "description": "Fonds d'archives privées : papiers de famille, archives d'entreprises, associations, archives ecclesiastical, archives de particuliers, archives d'architectes, etc.",
+        "periode": "Toutes périodes",
+        "instruments": [
+          {"cote": "6 J", "description": "Papiers Madeleine Baudoin, résistantes", "producteur": "Madeleine Baudoin", "periode": "1934-2003"},
+          {"cote": "43 J", "description": "Papiers Lucien Gaillard", "producteur": "Lucien Gaillard", "periode": "1941-1955"},
+          {"cote": "44 J", "description": "Papiers Paul Giraud", "producteur": "Paul Giraud", "periode": "1940-1945"},
+          {"cote": "2 J", "description": "Fonds du génie militaire", "producteur": "Génie militaire"}
+        ]
+      },
+      "L": {
+        "intitule": "Archives révolutionnaires",
+        "description": "Archives produites par les institutions révolutionnaires (1790-1800) : administrations départementales et district, tribunaux criminels, comités de surveillance.",
+        "periode": "1790-1800",
+        "instruments": [
+          {"cote": "L", "description": "Administrations départementales et district", "producteur": "Département des Bouches-du-Rhône"},
+          {"cote": "L", "description": "Tribunaux criminels", "producteur": "Tribunal criminel"},
+          {"cote": "L", "description": "Comités de surveillance", "producteur": "Comités de surveillance"}
+        ]
+      },
+      "M": {
+        "intitule": "Administration générale et économie",
+        "description": "Fonds de la Préfecture et services déconcentrés de l'Etat (1800-1940). Comprend cabinet du préfet, commerce, industrie, agriculture, статистики.",
+        "periode": "1800-1940",
+        "instruments": [
+          {"cote": "1 M", "description": "Préfecture, Cabinet - Administration générale du département", "producteur": "Préfecture des Bouches-du-Rhône", "periode": "1790-1949"},
+          {"cote": "2 M", "description": "Préfecture - Personnel", "producteur": "Préfecture"},
+          {"cote": "3 M", "description": "Préfecture - Plébiscites et élections politiques", "producteur": "Préfecture", "periode": "1801-1942"},
+          {"cote": "4 M", "description": "Préfecture - Police", "producteur": "Préfecture - Police"},
+          {"cote": "5 M", "description": "Préfecture - Industrie, établissements classés insalubres", "producteur": "Préfecture", "periode": "1793-1947"},
+          {"cote": "6 M", "description": "Préfecture - Population, affaires économiques, statistiques", "producteur": "Préfecture", "periode": "An VIII-1940"},
+          {"cote": "7 M", "description": "Préfecture - Agriculture, forêts", "producteur": "Préfecture"},
+          {"cote": "8 M", "description": "Préfecture - Commerce et tourisme", "producteur": "Préfecture", "periode": "An VII-1945"},
+          {"cote": "9 M", "description": "Préfecture - Industrie, enseignement professionnel", "producteur": "Préfecture", "periode": "1800-1969"},
+          {"cote": "18 M", "description": "Inspection générale de l'administration, Préfecture de région", "producteur": "Préfecture de région", "periode": "1954-1978"}
+        ]
+      },
+      "N": {
+        "intitule": "Conseil général et conseils d'arrondissement",
+        "description": "Fonds du Conseil général puis Conseil départementale, et conseils d'arrondissement (supprimés en 1940). Comprend versements post-décentralisation en série W.",
+        "periode": "1800-present",
+        "instruments": [
+          {"cote": "N", "description": "Conseil général des Bouches-du-Rhône", "producteur": "Conseil général"},
+          {"cote": "N", "description": "Conseils d'arrondissement", "producteur": "Conseils d'arrondissement"}
+        ]
+      },
+      "O": {
+        "intitule": "Equipement, transports et logement",
+        "description": "Routes, chemins de fer, transports, urbanisme, logement, équipements collectifs.",
+        "periode": "XIXe-XXe siècle",
+        "instruments": [
+          {"cote": "2 O", "description": "Chemins de fer", "producteur": "Services des Ponts et Chaussées"},
+          {"cote": "7 O", "description": "Routes nationales", "producteur": "Services des Ponts et Chaussées"},
+          {"cote": "8 O", "description": "Routes départementales, ponts", "producteur": "Services des Ponts et Chaussées"}
+        ]
+      },
+      "P": {
+        "intitule": "Finances, contributions et cadastre",
+        "description": "Contributions directes et indirectes, cadastre, perceptions, trésor.",
+        "periode": "XIXe-XXe siècle",
+        "instruments": [
+          {"cote": "2 P", "description": "Contributions directes", "producteur": "Services fiscaux"},
+          {"cote": "P 2", "description": "Cadastre", "producteur": "Services fiscaux"},
+          {"cote": "3 P", "description": "Contributions indirectes", "producteur": "Services fiscaux"}
+        ]
+      },
+      "Q": {
+        "intitule": "Domaines et enregistrement",
+        "description": "Domaines nationaux, enregistrement, hypothèques, publicité foncière.",
+        "periode": "XIXe-XXe siècle",
+        "instruments": [
+          {"cote": "Q", "description": "Enregistrement", "producteur": "Services fiscaux"},
+          {"cote": "1 Q", "description": "Domaines nationaux", "producteur": "Domaines", "periode": "1790-1827"}
+        ]
+      },
+      "R": {
+        "intitule": "Affaires militaires",
+        "description": "Recensement militaire, organisation de l'armée, guerres, anciens combattants, sapeurs-pompiers, marine.",
+        "periode": "XIXe-XXe siècle",
+        "instruments": [
+          {"cote": "1 R", "description": "Recensement militaire, organisation de l'armée", "producteur": "Préfecture"},
+          {"cote": "2 R", "description": "Recensement militaire", "producteur": "Préfecture"},
+          {"cote": "3 R", "description": "Office département des anciens combattants", "producteur": "Office national des anciens combattants", "fonds_prives": "Comprend fichier alphabétique 3 R 839-927"},
+          {"cote": "4 R", "description": "Gardes nationaux et corps spéciaux", "producteur": "Garde nationale"},
+          {"cote": "5 R", "description": "Gendarmerie", "producteur": "Gendarmerie"},
+          {"cote": "6 R", "description": "Sapeurs-pompiers", "producteur": "Sapeurs-pompiers"},
+          {"cote": "7 R", "description": "Marine et garde-côte", "producteur": "Marine"},
+          {"cote": "8 R", "description": "Guerres 1870-1871 et 1914-1918", "producteur": "Divers"}
+        ]
+      },
+      "S": {
+        "intitule": "Travaux publics et transports",
+        "description": "Ponts et Chaussées, irrigation, service hydraulique, tramway, ports.",
+        "periode": "XIXe-XXe siècle",
+        "instruments": [
+          {"cote": "2 S", "description": "Ponts et Chaussées", "producteur": "Services des Ponts et Chaussées"},
+          {"cote": "4 S", "description": "Ponts et Chaussées", "producteur": "Services des Ponts et Chaussées"},
+          {"cote": "5 S", "description": "Cours d'eau, canaux, irrigation", "producteur": "Service hydraulique"},
+          {"cote": "6 S", "description": "Service maritime, ports", "producteur": "Service maritime"},
+          {"cote": "7 S", "description": "Service maritime", "producteur": "Service maritime"},
+          {"cote": "8 S", "description": "Service hydraulique", "producteur": "Service hydraulique"},
+          {"cote": "9 S", "description": "Tramway de Marseille", "producteur": "Compagnie de tramway"}
+        ]
+      },
+      "T": {
+        "intitule": "Enseignement",
+        "description": "Rectorat, inspection académique, universités, établissements scolaires, examens et concours.",
+        "periode": "XIXe-XXe siècle",
+        "instruments": [
+          {"cote": "1 T", "description": "Enseignement supérieur, examens et concours", "producteur": "Rectorat"},
+          {"cote": "2 T", "description": "Imprimerie, librairie, presse, dépôt légal", "producteur": "Préfecture", "periode": "1841-1915"}
+        ]
+      },
+      "U": {
+        "intitule": "Justice",
+        "description": "Cour d'appel, tribunal de grande instance, justices de paix.",
+        "periode": "XIXe-XXe siècle",
+        "instruments": [
+          {"cote": "2 U", "description": "Cour d'appel, Tribunal de grande instance", "producteur": "Cour d'appel"}
+        ]
+      },
+      "V": {
+        "intitule": "Cultes",
+        "description": "Bureau des cultes, execution des lois de séparation, congrégations religieuses.",
+        "periode": "An VIII-1958",
+        "instruments": [
+          {"cote": "V", "description": "Bureau des cultes, exécution des lois de séparation", "producteur": "Préfecture", "periode": "1900-1949"},
+          {"cote": "1 V - 128 V", "description": "Cultes", "producteur": "Préfecture - Bureau des cultes", "periode": "An VIII-1958"}
+        ]
+      },
+      "W": {
+        "intitule": "Archives contemporaines",
+        "description": "Fonds d'archives produits par les administrations publiques à partir de 1940 (période contemporaine). Le cadre de classement W est organisé par versements thématiques.",
+        "periode": "1940-present",
+        "note": "La série W est organisée par versements. Les instruments de recherche ci-dessous sont groupés par thématiques fonctionnelles.",
+        "instruments": [],
+        "thematiques": {
+          "administration_generale": {
+            "intitule": "Administration générale",
+            "description": "Cabinet du préfet, services de la préfecture, administration générale",
+            "cotes": [
+              {"cote": "76 W", "description": "Préfecture, Cabinet - Affaires générales", "periode": "1931-1946"},
+              {"cote": "76 W", "description": "Préfecture, Cabinet - Affaires générales", "periode": "1935-1946"},
+              {"cote": "149 W", "description": "Commissariat régional de la République", "periode": "1944-1946"},
+              {"cote": "150 W", "description": "Préfecture, Cabinet - Affaires générales", "periode": "1944-1947"},
+              {"cote": "91 W", "description": "Préfecture", "producteur": "Préfecture"}
+            ],
+            "url": "https://www.archives13.fr/archive/recherche/fonds/n:93?Rech_cote=%2276%20W%22"
+          },
+          "opinion_politique": {
+            "intitule": "Opinion, vie politique et associative",
+            "description": "Cabinet du préfet (affaires politiques), renseignements généraux, associations, presse, vie politique",
+            "cotes": [
+              {"cote": "72 W", "description": "Préfecture, Cabinet - Opinion", "periode": "Contemporain"},
+              {"cote": "76 W", "description": "Préfecture, Cabinet - Opinion", "periode": "1931-1946"},
+              {"cote": "107 W", "description": "Préfecture, Cabinet - Opinion", "periode": "Contemporain"},
+              {"cote": "135 W", "description": "Préfecture, Cabinet - Opinion", "periode": "Contemporain"},
+              {"cote": "137 W", "description": "Préfecture, Cabinet - Opinion", "periode": "Contemporain"},
+              {"cote": "138 W", "description": "Préfecture, Cabinet - Opinion", "periode": "Contemporain"},
+              {"cote": "148 W", "description": "Préfecture, Cabinet - Opinion", "periode": "Contemporain"},
+              {"cote": "2126 W", "description": "Direction régionale des Renseignements généraux", "periode": "Contemporain"},
+              {"cote": "5 W", "description": "Police - Renseignements généraux", "producteur": "Préfecture - Police"},
+              {"cote": "4 M", "description": "Préfecture - Police", "periode": "1800-1940"}
+            ],
+            "url": "https://www.archives13.fr/archive/recherche/fonds/n:93?Rech_cote=%22W%22&Rech_sujets=opinion"
+          },
+          "police_et_securite": {
+            "intitule": "Police et sécurité",
+            "description": "Cabinet du préfet de police, centres d'internement WWII, prison des Baumettes, surveillance",
+            "cotes": [
+              {"cote": "142 W", "description": "Centres d'internement WWII", "subtitle": "Brébant, Saint-Pierre, Les Milles, etc.", "periode": "WWII"},
+              {"cote": "1871 W", "description": "Prison des Baumettes", "periode": "1940-1958"},
+              {"cote": "1907 W", "description": "Cabinet du préfet de police", "periode": "Contemporain"},
+              {"cote": "2062 W", "description": "Cabinet du préfet de police", "periode": "Contemporain"},
+              {"cote": "2996 W", "description": "Cabinet du préfet de police", "periode": "Contemporain"}
+            ],
+            "url": "https://www.archives13.fr/archive/recherche/fonds/n:93?Rech_cote=%22142%20W%22"
+          },
+          "affaires_militaires_defense": {
+            "intitule": "Affaires militaires et défense",
+            "description": "Office national des anciens combattants, affaires militaires de la période WWII",
+            "cotes": [
+              {"cote": "48 W", "description": "Office national des anciens combattants", "periode": "1939-1965"},
+              {"cote": "76 W", "description": "Préfecture, Cabinet - Affaires générales", "periode": "1931-1946"},
+              {"cote": "149 W", "description": "Commissariat régional de la République", "periode": "1944-1946"},
+              {"cote": "150 W", "description": "Préfecture, Cabinet - Affaires générales", "periode": "1944-1947"}
+            ],
+            "url": "https://www.archives13.fr/archive/recherche/fonds/n:93?Rech_cote=%2248%20W%22"
+          },
+          "economie_industrie": {
+            "intitule": "Economie et industrie",
+            "description": "Service des Mines, DRIRE, ANVAR, Industrie, commerce, consommation",
+            "cotes": [
+              {"cote": "91 W", "description": "Préfecture - Economie", "periode": "Contemporain"},
+              {"cote": "100 W", "description": "Service des Mines", "periode": "Contemporain"},
+              {"cote": "1726 W", "description": "ANVAR - Agence nationale pour la valorisation de la recherche", "producteur": "ANVAR"},
+              {"cote": "2310 W", "description": "DRIRE - Direction régionale de l'Industrie, de la Recherche et de l'Environnement", "producteur": "DRIRE"},
+              {"cote": "2312 W", "description": "DRIRE - Direction régionale de l'Industrie, de la Recherche et de l'Environnement", "producteur": "DRIRE"}
+            ],
+            "url": "https://www.archives13.fr/archive/recherche/fonds/n:93?Rech_cote=%22100%20W%22"
+          },
+          "agriculture_forets": {
+            "intitule": "Agriculture et forêts",
+            "description": "Services agricoles, Direction de l'agriculture, Office national des forêts, chambres d'agriculture, offices professionnels",
+            "cotes": [
+              {"cote": "187 W", "description": "Agriculture", "periode": "Contemporain"},
+              {"cote": "188 W", "description": "Agriculture", "periode": "Contemporain"},
+              {"cote": "1898 W", "description": "Agriculture", "periode": "Contemporain"},
+              {"cote": "1899 W", "description": "Agriculture", "periode": "Contemporain"},
+              {"cote": "196 W", "description": "Agriculture", "periode": "Contemporain"},
+              {"cote": "2256 W", "description": "Agriculture", "periode": "Contemporain"},
+              {"cote": "2286 W - 2293 W", "description": "Agriculture", "periode": "Contemporain"},
+              {"cote": "194 W", "description": "ONF - Office national des forêts", "producteur": "ONF"},
+              {"cote": "1918 W", "description": "ONF - Office national des forêts", "producteur": "ONF"},
+              {"cote": "2196 W", "description": "ONF - Office national des forêts", "producteur": "ONF"},
+              {"cote": "2235 W", "description": "ONF - Office national des forêts", "producteur": "ONF"},
+              {"cote": "2384 W", "description": "ONF - Office national des forêts", "producteur": "ONF"},
+              {"cote": "1737 W", "description": "Office national interprofessionnel des céréales", "producteur": "ONIC", "periode": "1935-1998"},
+              {"cote": "1745 W", "description": "Office national interprofessionnel des céréales", "producteur": "ONIC", "periode": "1935-1998"},
+              {"cote": "1837 W", "description": "Office national interprofessionnel des céréales", "producteur": "ONIC", "periode": "1935-1998"},
+              {"cote": "1840 W", "description": "Office national interprofessionnel des céréales", "producteur": "ONIC", "periode": "1935-1998"},
+              {"cote": "1818 W", "description": "Office national interprofessionnel des oléagineux", "producteur": "ONIDOL", "periode": "1933-1999"},
+              {"cote": "2175 W", "description": "Office national interprofessionnel des oléagineux", "producteur": "ONIDOL", "periode": "1933-1999"}
+            ],
+            "url": "https://www.archives13.fr/archive/recherche/fonds/n:93?Rech_cote=%22187%20W%22"
+          },
+          "enseignement": {
+            "intitule": "Enseignement et formation",
+            "description": "Rectorat, inspection académique, universités, établissements scolaires, examens",
+            "cotes": [
+              {"cote": "1905 W 10", "description": "Baccalauréat Simone Veil", "periode": "1944"},
+              {"cote": "122 W 17", "description": "Bulletins scolaires Edouard Balladur", "periode": "1942-1946"},
+              {"cote": "122 W 22", "description": "Bulletins scolaires Edouard Balladur", "periode": "1942-1946"},
+              {"cote": "122 W 28", "description": "Bulletins scolaires Edouard Balladur", "periode": "1942-1946"},
+              {"cote": "122 W 33", "description": "Bulletins scolaires Edouard Balladur", "periode": "1942-1946"},
+              {"cote": "1 T 2160", "description": "Baccalauréat Darius Milhaud", "periode": "1909"}
+            ],
+            "url": "https://www.archives13.fr/archive/recherche/fonds/n:93?Rech_cote=%221905%20W%22"
+          },
+          "urbanisme_logement": {
+            "intitule": "Urbanisme, aménagement et logement",
+            "description": "Permis de construire, lotissements, DATAR, aménagement du territoire",
+            "cotes": [
+              {"cote": "165 W", "description": "Permis de construire", "periode": "Contemporain"},
+              {"cote": "2250 W", "description": "Permis de construire et lotir", "periode": "Contemporain"},
+              {"cote": "1183 W", "description": "DATAR - Délégation à l'aménagement du territoire", "producteur": "DATAR"},
+              {"cote": "1185 W", "description": "DATAR - Délégation à l'aménagement du territoire", "producteur": "DATAR"}
+            ],
+            "url": "https://www.archives13.fr/archive/recherche/fonds/n:93?Rech_cote=%22165%20W%22"
+          },
+          "transports_mobilite": {
+            "intitule": "Transports et mobilité",
+            "description": "Service maritime, ports, transports",
+            "cotes": [
+              {"cote": "1937 W", "description": "Service maritime", "periode": "Contemporain"},
+              {"cote": "1884 W", "description": "Service maritime", "periode": "Contemporain"}
+            ],
+            "url": "https://www.archives13.fr/archive/recherche/fonds/n:93?Rech_cote=%221937%20W%22"
+          },
+          "justice": {
+            "intitule": "Justice",
+            "description": "Procédures judiciaires, affaires criminelles, mineurs",
+            "cotes": [
+              {"cote": "1074 W", "description": "Procès du gang des tractions avant", "periode": "1949"},
+              {"cote": "2021 W 7-8", "description": "Affaire Christian Ranucci (pull-over rouge)", "periode": "Contemporain"},
+              {"cote": "W", "description": "Jugements concernant les mineurs", "note": "Après 1945, communicabilité 100 ans"}
+            ],
+            "url": "https://www.archives13.fr/archive/recherche/fonds/n:93?Rech_cote=%221021%20W%22"
+          }
+        }
+      },
+      "X": {
+        "intitule": "Assistance et prévoyance",
+        "description": "Bureaux de bienfaisance, hospices, œuvres sociales, assistance publique, mutualité.",
+        "periode": "XIXe-XXe siècle",
+        "instruments": []
+      },
+      "Y": {
+        "intitule": "Camps d'internement",
+        "description": "Camps d'internement de la Première Guerre mondiale.",
+        "periode": "1914-1918",
+        "instruments": [
+          {"cote": "1 Y", "description": "Camps d'internement WWI", "periode": "1914-1918"}
+        ]
+      },
+      "Z": {
+        "intitule": "Fonds des tribunaux administratif et cours administratives d'appel",
+        "description": "Tribunal administratif, cour administrative d'appel.",
+        "periode": "XXe siècle",
+        "instruments": []
+      }
+    }
+  },
+  "series_speciales": {
+    "hd": {
+      "intitule": "Archives hospitalières déposées",
+      "description": "Fonds des hôpitaux et établissements de santé déposés aux Archives départementales.",
+      "periode": "Toutes périodes",
+      "instruments": [
+        {"cote": "1 HD - 68 HD", "description": "Archives hospitalières déposées", "note": "68 versements"},
+        {"cote": "1 HD - 18 HD", "description": "Hôpitaux de Marseille", "note": "Fonds le plus important (~391 mètres linéaires)"}
+      ]
+    },
+    "e_etp": {
+      "intitule": "Archives notariales et établissements publics",
+      "description": "Fonds des études notariales et établissements publics gérés en série E.",
+      "instruments": [
+        {"cote": "86 études", "description": "Etudes de notaires", "note": "~86 études notariales"},
+        {"cote": "300 E - 426 E", "description": "Fonds notariaux", "note": "~8 km linéaires de documents"},
+        {"cote": "103 E - 182 E", "description": "Archives communales déposées", "note": "78 communes"},
+        {"cote": "194 E", "description": "Archives intercommunales déposées"},
+        {"cote": "1 ETP", "description": "Houillères du bassin de Provence et mines de Gardanne", "periode": "1817-2003"},
+        {"cote": "2 ETP", "description": "Poudrerie de Saint-Chamas", "periode": "1835-1944"},
+        {"cote": "3 ETP", "description": "Chambre d'agriculture", "periode": "1927-1940"},
+        {"cote": "4 ETP", "description": "EPAREB - Etablissement public d'aménagement des rives de l'étang de Berre", "periode": "Contemporain"},
+        {"cote": "8 ETP", "description": "Manufacture des tabacs et d'allumettes de Marseille", "periode": "1892-1977"}
+      ]
+    },
+    "fi": {
+      "intitule": "Fonds iconographiques",
+      "description": "Documents graphiques, photographies, cartes postales, affiches.",
+      "instruments": [
+        {"cote": "1 Fi", "description": "Documents graphiques", "type": "Graphique"},
+        {"cote": "2 Fi", "description": "Documents graphiques", "type": "Graphique"},
+        {"cote": "5 Fi", "description": "Photographies", "type": "Photographie"},
+        {"cote": "6 Fi", "description": "Cartes postales", "type": "Cartographie"},
+        {"cote": "8 Fi", "description": "Affiches", "type": "Affiche"},
+        {"cote": "78 Fi", "description": "Série spécialisée"},
+        {"cote": "104 Fi", "description": "Série spécialisée"}
+      ]
+    },
+    "k": {
+      "intitule": "Collections et fonds spécifiques",
+      "description": "Collections reconstituées, fonds spécifiques.",
+      "instruments": [
+        {"cote": "5 K", "description": "Fonds du Conseil de préfecture", "producteur": "Conseil de préfecture"}
+      ]
+    }
+  },
+  "navigation": {
+    "sections_principales": [
+      {
+        "nom": "Archives anciennes",
+        "url": "https://www.archives13.fr/n/archives-anciennes/n:101",
+        "series": ["A", "B", "C", "D", "E", "G", "H"]
+      },
+      {
+        "nom": "Archives révolutionnaires",
+        "url": "https://www.archives13.fr/n/archives-revolutionnaires/n:102",
+        "series": ["L", "1 Q"]
+      },
+      {
+        "nom": "Archives modernes et contemporaines",
+        "url": "https://www.archives13.fr/n/archives-modernes-et-contemporaines/n:103",
+        "series": ["M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "K"]
+      },
+      {
+        "nom": "Archives hospitalières",
+        "url": "https://www.archives13.fr/n/archives-hospitalieres/n:104",
+        "series": ["HD"]
+      },
+      {
+        "nom": "Archives communales et intercommunales déposées",
+        "url": "https://www.archives13.fr/n/archives-communales-et-intercommunales-deposees/n:105",
+        "series": ["E"]
+      },
+      {
+        "nom": "Archives privées",
+        "url": "https://www.archives13.fr/n/archives-privees/n:106",
+        "series": ["J"]
+      },
+      {
+        "nom": "Fonds iconographiques et audiovisuels",
+        "url": "https://www.archives13.fr/n/fonds-iconographiques-et-audiovisuels/n:107",
+        "series": ["Fi"]
+      },
+      {
+        "nom": "Archives notariales",
+        "url": "https://www.archives13.fr/n/archives-notariales/n:110",
+        "series": ["E"]
+      }
+    ],
+    "acces_numerises": [
+      {
+        "nom": "Registres paroissiaux et état civil",
+        "url": "https://www.archives13.fr/archive/recherche/etatcivil/n:64"
+      },
+      {
+        "nom": "Recensement de la population",
+        "url": "https://www.archives13.fr/archive/recherche/recensement2/n:45"
+      },
+      {
+        "nom": "Recensement militaire",
+        "url": "https://www.archives13.fr/archive/recherche/matricule/n:38"
+      },
+      {
+        "nom": "Etablissements pénitentiaires",
+        "url": "https://www.archives13.fr/archive/recherche/ecrous/n:37"
+      },
+      {
+        "nom": "Cadastre",
+        "url": "https://www.archives13.fr/archive/recherche/cadastre/n:36"
+      },
+      {
+        "nom": "Hypothèques",
+        "url": "https://www.archives13.fr/archive/recherche/hypotheque/n:42"
+      },
+      {
+        "nom": "Enregistrement",
+        "url": "https://www.archives13.fr/archive/recherche/enregistrement/n:33"
+      },
+      {
+        "nom": "Notaires",
+        "url": "https://www.archives13.fr/archive/recherche/notaire/n:47"
+      },
+      {
+        "nom": "Documents iconographiques",
+        "url": "https://www.archives13.fr/archive/recherche/icono/n:75"
+      },
+      {
+        "nom": "Archives anciennes",
+        "url": "https://www.archives13.fr/archive/recherche/anciennes/n:258"
+      }
+    ]
+  },
+  "statistiques": {
+    "total_series_principales": 26,
+    "series_avec_instruments_detaille": ["M", "R", "W", "J", "V", "S", "O", "P", "Q", "T", "U", "L", "E", "H", "B", "C"],
+    "thematiques_W": 11,
+    "cotes_W_referencees": 45,
+    "sections_numerisees": 10
+  }
+}
