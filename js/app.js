@@ -46,21 +46,21 @@ class AD13Cartography {
   }
 
   collectAllInstruments() {
-    this.allInstruments = [];
+    // Build a map keyed by cote+eadid to avoid duplicates between
+    // series.instruments and series.thematiques.cotes (especially for W).
+    const byKey = new Map();
     const series = this.data.cadre_classement.series;
 
+    const keyOf = (i) => (i.eadid || '') + '|' + (i.cote || i.name || '');
+
+    // Pass 1: thematiques first (to attach theme info)
     Object.keys(series).forEach(key => {
       const s = series[key];
-      (s.instruments || []).forEach(i => {
-        this.allInstruments.push({
-          ...i, series: key, seriesIntitule: s.intitule, color: s.color
-        });
-      });
       const them = s.thematiques || {};
       Object.keys(them).forEach(tk => {
         const t = them[tk];
         (t.cotes || []).forEach(c => {
-          this.allInstruments.push({
+          byKey.set(keyOf(c), {
             ...c, series: key, seriesIntitule: s.intitule,
             theme: tk, themeName: t.intitule, color: s.color
           });
@@ -68,15 +68,32 @@ class AD13Cartography {
       });
     });
 
+    // Pass 2: series.instruments (don't override existing theme assignment)
+    Object.keys(series).forEach(key => {
+      const s = series[key];
+      (s.instruments || []).forEach(i => {
+        const k = keyOf(i);
+        if (byKey.has(k)) return;
+        byKey.set(k, {
+          ...i, series: key, seriesIntitule: s.intitule, color: s.color
+        });
+      });
+    });
+
+    // Pass 3: special series
     Object.keys(this.data.series_speciales || {}).forEach(key => {
       const s = this.data.series_speciales[key];
       (s.instruments || []).forEach(i => {
-        this.allInstruments.push({
+        const k = keyOf(i);
+        if (byKey.has(k)) return;
+        byKey.set(k, {
           ...i, series: key.toUpperCase(),
           seriesIntitule: s.intitule, color: s.color, special: true
         });
       });
     });
+
+    this.allInstruments = Array.from(byKey.values());
   }
 
   countsBySeries() {
@@ -92,48 +109,113 @@ class AD13Cartography {
   }
 
   buildHierarchy() {
+    // Hiérarchie pour le sunburst : 3 niveaux
+    //   AD13 -> Série -> (thématiques pour W / tranche numérique sinon)
+    // On agrège les cotes en buckets pour rester lisible avec ~950 IR.
     const hierarchy = { name: 'AD13', children: [] };
     const series = this.data.cadre_classement.series;
+
+    const bucketLabel = (n) => {
+      if (n < 100) return '< 100';
+      if (n < 500) return '100-499';
+      if (n < 1000) return '500-999';
+      if (n < 1500) return '1000-1499';
+      if (n < 2000) return '1500-1999';
+      if (n < 2500) return '2000-2499';
+      if (n < 3000) return '2500-2999';
+      if (n < 3500) return '3000-3499';
+      return '≥ 3500';
+    };
+
+    const numFromCote = (cote) => {
+      const m = (cote || '').match(/^\s*(\d+)/);
+      return m ? parseInt(m[1], 10) : null;
+    };
 
     Object.keys(series).forEach(seriesKey => {
       const s = series[seriesKey];
       const node = {
-        name: seriesKey,
-        fullName: s.intitule,
-        description: s.description,
-        periode: s.periode,
-        color: s.color,
-        children: []
+        name: seriesKey, fullName: s.intitule,
+        description: s.description, periode: s.periode,
+        color: s.color, children: [], _instrumentCount: (s.instruments || []).length
       };
-      (s.instruments || []).forEach(inst => {
-        node.children.push({
-          name: inst.cote,
-          fullName: inst.description,
-          description: inst.description,
-          periode: inst.periode || s.periode,
-          producer: inst.producteur,
-          color: s.color
+
+      // For W: group by thematique (classed) + buckets for the rest
+      if (seriesKey === 'W' && s.thematiques) {
+        const claimed = new Set();
+        Object.keys(s.thematiques).forEach(tk => {
+          const t = s.thematiques[tk];
+          (t.cotes || []).forEach(c => claimed.add(c.eadid + '|' + c.cote));
         });
-      });
-      const them = s.thematiques || {};
-      Object.keys(them).forEach(tk => {
-        const t = them[tk];
-        const tnode = {
-          name: t.intitule,
-          fullName: t.intitule,
-          description: t.description,
-          color: this.adjustColor(s.color, 15),
-          children: []
-        };
-        (t.cotes || []).forEach(c => {
-          tnode.children.push({
-            name: c.cote, fullName: c.description, description: c.description,
-            periode: c.periode, producer: c.producteur,
-            color: this.adjustColor(s.color, 30)
+        // thematique nodes (each weighted by cote count)
+        Object.keys(s.thematiques).forEach(tk => {
+          const t = s.thematiques[tk];
+          const cnt = (t.cotes || []).length;
+          if (cnt === 0) return;
+          node.children.push({
+            name: t.intitule, fullName: t.intitule,
+            description: t.description,
+            color: this.adjustColor(s.color, 15),
+            value: cnt,
+            isLeaf: true
           });
         });
-        node.children.push(tnode);
-      });
+        // remaining W as numeric buckets
+        const remaining = (s.instruments || []).filter(i => !claimed.has((i.eadid||'') + '|' + i.cote));
+        const buckets = {};
+        remaining.forEach(i => {
+          const n = numFromCote(i.cote);
+          if (n == null) return;
+          const lbl = bucketLabel(n);
+          buckets[lbl] = (buckets[lbl] || 0) + 1;
+        });
+        Object.keys(buckets).sort().forEach(lbl => {
+          node.children.push({
+            name: lbl + ' W', fullName: 'Autres versements W (' + lbl + ')',
+            description: 'Versements W cotés ' + lbl + ' (non rattachés aux thématiques principales)',
+            color: this.adjustColor(s.color, 30),
+            value: buckets[lbl],
+            isLeaf: true
+          });
+        });
+      } else if ((s.instruments || []).length > 12) {
+        // bucket par tranches numériques
+        const buckets = {};
+        (s.instruments || []).forEach(i => {
+          const n = numFromCote(i.cote);
+          const lbl = (n == null) ? 'autre' : bucketLabel(n);
+          buckets[lbl] = (buckets[lbl] || 0) + 1;
+        });
+        Object.keys(buckets).sort().forEach(lbl => {
+          node.children.push({
+            name: `${lbl} ${seriesKey}`, fullName: `Série ${seriesKey} — ${lbl}`,
+            description: `Versements de la série ${seriesKey} cotés ${lbl}`,
+            color: this.adjustColor(s.color, 25),
+            value: buckets[lbl],
+            isLeaf: true
+          });
+        });
+      } else {
+        (s.instruments || []).forEach(inst => {
+          node.children.push({
+            name: inst.cote, fullName: inst.description,
+            description: inst.description,
+            periode: inst.periode || s.periode,
+            producer: inst.producteur,
+            color: this.adjustColor(s.color, 25),
+            value: 1, isLeaf: true
+          });
+        });
+      }
+
+      // série sans instruments : noeud factice avec valeur 1 pour qu'il apparaisse
+      if (node.children.length === 0) {
+        node.children.push({
+          name: '—', fullName: 'Aucun instrument cartographié',
+          color: this.adjustColor(s.color, 40),
+          value: 1, isLeaf: true, isPlaceholder: true
+        });
+      }
       hierarchy.children.push(node);
     });
 
@@ -143,13 +225,40 @@ class AD13Cartography {
         name: key.toUpperCase(), fullName: s.intitule,
         description: s.description, color: s.color, children: []
       };
-      (s.instruments || []).forEach(inst => {
-        node.children.push({
-          name: inst.cote, fullName: inst.description,
-          description: inst.description, periode: inst.periode,
-          producer: inst.producteur, color: s.color
+      const insts = s.instruments || [];
+      if (insts.length > 12) {
+        const buckets = {};
+        insts.forEach(i => {
+          const n = numFromCote(i.cote);
+          const lbl = (n == null) ? 'autre' : bucketLabel(n);
+          buckets[lbl] = (buckets[lbl] || 0) + 1;
         });
-      });
+        Object.keys(buckets).sort().forEach(lbl => {
+          node.children.push({
+            name: `${lbl} ${key.toUpperCase()}`,
+            fullName: `${s.intitule} — ${lbl}`,
+            color: this.adjustColor(s.color, 25),
+            value: buckets[lbl], isLeaf: true
+          });
+        });
+      } else {
+        insts.forEach(inst => {
+          node.children.push({
+            name: inst.cote, fullName: inst.description,
+            description: inst.description, periode: inst.periode,
+            producer: inst.producteur,
+            color: this.adjustColor(s.color, 25),
+            value: 1, isLeaf: true
+          });
+        });
+      }
+      if (node.children.length === 0) {
+        node.children.push({
+          name: '—', fullName: 'Aucun instrument',
+          color: this.adjustColor(s.color, 40),
+          value: 1, isLeaf: true, isPlaceholder: true
+        });
+      }
       hierarchy.children.push(node);
     });
 
@@ -257,7 +366,7 @@ class AD13Cartography {
       .attr('transform', `translate(${width/2}, ${height/2})`);
 
     const root = d3.hierarchy(this.hierarchy)
-      .sum(d => d.children ? 0 : 1)
+      .sum(d => d.value || 0)
       .sort((a, b) => b.value - a.value);
 
     d3.partition().size([2 * Math.PI, radius])(root);
