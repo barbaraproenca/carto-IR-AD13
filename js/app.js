@@ -23,6 +23,7 @@ class AD13Cartography {
   init() {
     this.normalizeColors();
     this.collectAllInstruments();
+    this.buildSearchIndex();
     this.buildHierarchy();
     this.buildSeriesButtons();
     this.buildThemeList();
@@ -94,6 +95,37 @@ class AD13Cartography {
     });
 
     this.allInstruments = Array.from(byKey.values());
+  }
+
+  // Normalisation pour la recherche : minuscules, sans accents,
+  // ligatures simplifiées, espaces unifiés.
+  normalize(str) {
+    if (str == null) return '';
+    return ('' + str)
+      .toLowerCase()
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '')
+      .replace(/[’‘ʼ´`]/g, "'")
+      .replace(/\s+/g, ' ')
+      .trim();
+  }
+
+  buildSearchIndex() {
+    // Concatène tous les champs textuels d'un instrument dans une seule chaîne
+    // normalisée, stockée dans _idx pour accélérer la recherche.
+    const fields = [
+      'cote', 'name', 'description', 'fullName',
+      'producteur', 'producer', 'origination',
+      'themeName', 'seriesIntitule', 'series',
+      'periode', 'periode_normal', 'unitdate',
+      'extent', 'physloc', 'scopecontent',
+      'auteur_ir', 'titre_ir', 'eadid', 'url'
+    ];
+    this.allInstruments.forEach(i => {
+      const parts = [];
+      fields.forEach(f => { if (i[f]) parts.push(i[f]); });
+      i._idx = this.normalize(parts.join(' · '));
+    });
   }
 
   countsBySeries() {
@@ -534,7 +566,7 @@ class AD13Cartography {
       if (btn) this.filterBySeries(btn.dataset.series);
     });
     document.getElementById('searchInput').addEventListener('input', (e) => {
-      this.searchTerm = e.target.value.toLowerCase();
+      this.searchTerm = this.normalize(e.target.value);
       this.updateResults();
     });
   }
@@ -548,14 +580,12 @@ class AD13Cartography {
       filtered = filtered.filter(i => i.theme === this.currentTheme);
     }
     if (this.searchTerm) {
-      const t = this.searchTerm;
-      filtered = filtered.filter(i =>
-        ((i.cote || i.name || '') + '').toLowerCase().includes(t) ||
-        ((i.description || i.fullName || '') + '').toLowerCase().includes(t) ||
-        ((i.producteur || i.producer || '') + '').toLowerCase().includes(t) ||
-        ((i.themeName || '') + '').toLowerCase().includes(t) ||
-        ((i.seriesIntitule || '') + '').toLowerCase().includes(t)
-      );
+      // Recherche multi-mots, insensible aux accents/casse, sur tous les champs.
+      const tokens = this.searchTerm.split(/\s+/).filter(Boolean);
+      filtered = filtered.filter(i => {
+        const idx = i._idx || '';
+        return tokens.every(tok => idx.includes(tok));
+      });
     }
 
     const container = document.getElementById('resultsList');
