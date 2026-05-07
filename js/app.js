@@ -26,7 +26,6 @@ class AD13Cartography {
     this.buildSearchIndex();
     this.buildHierarchy();
     this.buildSeriesButtons();
-    this.buildThemeList();
     this.renderStats();
     this.createCirclePack();
     this.createBarChart();
@@ -355,35 +354,6 @@ class AD13Cartography {
     });
   }
 
-  buildThemeList() {
-    const container = document.getElementById('themeList');
-    const themes = this.data.cadre_classement.series.W?.thematiques || {};
-    container.innerHTML = '';
-    Object.keys(themes).forEach(key => {
-      const theme = themes[key];
-      const item = document.createElement('div');
-      item.className = 'theme-item';
-      item.dataset.theme = key;
-      item.innerHTML = `
-        <span class="color-dot" style="background: ${this.data.cadre_classement.series.W.color}"></span>
-        <span class="theme-name">${theme.intitule}</span>
-        <span class="theme-count">${(theme.cotes || []).length}</span>
-      `;
-      item.addEventListener('click', () => this.selectTheme(key));
-      container.appendChild(item);
-    });
-  }
-
-  selectTheme(themeKey) {
-    document.querySelectorAll('.theme-item').forEach(i => i.classList.remove('selected'));
-    if (this.currentTheme === themeKey) {
-      this.currentTheme = null;
-    } else {
-      this.currentTheme = themeKey;
-      document.querySelector(`[data-theme="${themeKey}"]`)?.classList.add('selected');
-    }
-    this.updateResults();
-  }
 
   createCirclePack() {
     // Circle packing avec compression douce (puissance ~0.55) sur les comptes :
