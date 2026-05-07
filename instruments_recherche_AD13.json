@@ -12,8 +12,8 @@
     "description": "Le cadre de classement des archives départementales organize les fonds selon leur nature et provenance. Les séries principales sont: A-Z pour les archives publiques, J pour les archives privées, HD pour les archives hospitalières déposées, E/ETP pour les archives notariales et établissements publics, Fi pour les fonds iconographiques.",
     "series": {
       "A": {
-        "intitule": "Actes du pouvoir souverain",
-        "description": "Actes émanant du pouvoir royal et impérial : ordonnances, édits, déclarations, lettres patentes, brevets.",
+        "intitule": "Actes du pouvoir souverain et domaine public",
+        "description": "Actes émanant du pouvoir royal et impérial : ordonnances, édits, déclarations, lettres patentes, brevets ; documents relatifs au domaine public.",
         "periode": "Ancien Régime",
         "color": "",
         "instruments": [
@@ -35,7 +35,7 @@
       },
       "B": {
         "intitule": "Cours et juridictions",
-        "description": "Parlement de Provence, Cour des Comptes, Juridictions royales (sénéchaussées, bailliages).",
+        "description": "Parlement de Provence, Cour des comptes, sénéchaussées, bailliages, amirautés, tribunaux royaux et consulaires d'Ancien Régime.",
         "periode": "Ancien Régime",
         "color": "",
         "instruments": [
@@ -126,8 +126,8 @@
         ]
       },
       "C": {
-        "intitule": "Administrationsprovinciales",
-        "description": "Etats de Provence, Intendance de Provence, Bureaux des finances.",
+        "intitule": "Administrations provinciales",
+        "description": "États de Provence, Intendance de Provence, bureaux des finances, viguiers.",
         "periode": "Ancien Régime",
         "color": "",
         "instruments": [
@@ -147,8 +147,8 @@
         ]
       },
       "D": {
-        "intitule": "Instruction publique, sciences, arts et bibliothèques",
-        "description": "Documents relatifs à l'enseignement, aux académies, bibliothèques, sociétés savantes.",
+        "intitule": "Instruction publique, sciences et arts",
+        "description": "Université d'Aix, collèges, académies, bibliothèques, sociétés savantes (Ancien Régime).",
         "periode": "Ancien Régime",
         "color": "",
         "instruments": [
@@ -169,8 +169,8 @@
         ]
       },
       "E": {
-        "intitule": "Juridictions royales spéciales et corporatives",
-        "description": "Juridiction de l'intendance des galères, intendance sanitaire, jurandes et guildes,énéchanciers, notaires et tabellions.",
+        "intitule": "Féodalité, communes, bourgeoisie, familles, notaires et corporations",
+        "description": "Pour les AD13 : intendance des galères, intendance sanitaire, communautés de métiers (jurandes, corporations), familles, notaires et tabellions d'Ancien Régime.",
         "periode": "Ancien Régime",
         "color": "",
         "instruments": [
@@ -1366,7 +1366,7 @@
       },
       "G": {
         "intitule": "Clergé séculier",
-        "description": "Actes des évêqués,abbés, chapitres,cures, fabriques, diocèses,Officialités.",
+        "description": "Archevêchés d'Aix (1 G) et d'Arles (3 G), évêché de Marseille (5 G), chapitres, cures, fabriques, officialités.",
         "periode": "Ancien Régime",
         "color": "",
         "instruments": [
@@ -1557,8 +1557,8 @@
         "instruments": []
       },
       "J": {
-        "intitule": "Archives privées",
-        "description": "Fonds d'archives privées : papiers de famille, archives d'entreprises, associations, archives ecclesiastical, archives de particuliers, archives d'architectes, etc.",
+        "intitule": "Archives privées (entrées par voie extraordinaire)",
+        "description": "Papiers de famille, archives d'entreprises, d'associations, d'architectes, de personnalités, dons et dépôts privés. Toutes périodes.",
         "periode": "Toutes périodes",
         "color": "",
         "instruments": [
@@ -2301,22 +2301,22 @@
         ]
       },
       "L": {
-        "intitule": "Archives révolutionnaires",
-        "description": "Archives produites par les institutions révolutionnaires (1790-1800) : administrations départementales et district, tribunaux criminels, comités de surveillance.",
+        "intitule": "Administrations et juridictions de la période révolutionnaire (1790-1800)",
+        "description": "Administrations départementales, districts, cantons, tribunaux criminels, comités de surveillance, biens nationaux.",
         "periode": "1790-1800",
         "color": "",
         "instruments": []
       },
       "M": {
-        "intitule": "Administration générale et économie",
-        "description": "Fonds de la Préfecture et services déconcentrés de l'Etat (1800-1940). Comprend cabinet du préfet, commerce, industrie, agriculture, статистики.",
+        "intitule": "Administration générale et économie (1800-1940)",
+        "description": "Cabinet du préfet, personnel préfectoral, élections, police, industrie, commerce, agriculture, statistique, population.",
         "periode": "1800-1940",
         "color": "",
         "instruments": []
       },
       "N": {
-        "intitule": "Conseil général et conseils d'arrondissement",
-        "description": "Fonds du Conseil général puis Conseil départementale, et conseils d'arrondissement (supprimés en 1940). Comprend versements post-décentralisation en série W.",
+        "intitule": "Administration et comptabilité départementales (1800-1940)",
+        "description": "Conseil général, conseils d'arrondissement, comptabilité du département, immeubles départementaux.",
         "periode": "1800-present",
         "color": "",
         "instruments": [
@@ -2337,50 +2337,50 @@
         ]
       },
       "O": {
-        "intitule": "Equipement, transports et logement",
-        "description": "Routes, chemins de fer, transports, urbanisme, logement, équipements collectifs.",
+        "intitule": "Administration et comptabilité communales (1800-1940)",
+        "description": "Tutelle préfectorale sur les communes : finances, voirie communale, bâtiments, dons et legs.",
         "periode": "XIXe-XXe siècle",
         "color": "",
         "instruments": []
       },
       "P": {
-        "intitule": "Finances, contributions et cadastre",
-        "description": "Contributions directes et indirectes, cadastre, perceptions, trésor.",
+        "intitule": "Finances, cadastre, postes (1800-1940)",
+        "description": "Trésorerie générale, contributions directes et indirectes, cadastre, douanes, postes et télécommunications.",
         "periode": "XIXe-XXe siècle",
         "color": "",
         "instruments": []
       },
       "Q": {
-        "intitule": "Domaines et enregistrement",
-        "description": "Domaines nationaux, enregistrement, hypothèques, publicité foncière.",
+        "intitule": "Domaines, enregistrement, hypothèques (1800-1940)",
+        "description": "Domaines nationaux, enregistrement, conservation des hypothèques.",
         "periode": "XIXe-XXe siècle",
         "color": "",
         "instruments": []
       },
       "R": {
-        "intitule": "Affaires militaires",
-        "description": "Recensement militaire, organisation de l'armée, guerres, anciens combattants, sapeurs-pompiers, marine.",
+        "intitule": "Affaires militaires et organismes de temps de guerre (1800-1940)",
+        "description": "Recensement militaire, organisation de l'armée, gendarmerie, gardes nationaux, sapeurs-pompiers, marine, anciens combattants, guerres 1870-1871 et 1914-1918.",
         "periode": "XIXe-XXe siècle",
         "color": "",
         "instruments": []
       },
       "S": {
-        "intitule": "Travaux publics et transports",
-        "description": "Ponts et Chaussées, irrigation, service hydraulique, tramway, ports.",
+        "intitule": "Travaux publics et transports (1800-1940)",
+        "description": "Ponts et chaussées, routes, navigation intérieure, ports maritimes, chemins de fer, mines, irrigation.",
         "periode": "XIXe-XXe siècle",
         "color": "",
         "instruments": []
       },
       "T": {
-        "intitule": "Enseignement",
-        "description": "Rectorat, inspection académique, universités, établissements scolaires, examens et concours.",
+        "intitule": "Enseignement, affaires culturelles et sports (1800-1940)",
+        "description": "Rectorat, inspection académique, écoles, lycées, universités, examens (dont baccalauréat), bibliothèques publiques, monuments historiques, sports.",
         "periode": "XIXe-XXe siècle",
         "color": "",
         "instruments": []
       },
       "U": {
-        "intitule": "Justice",
-        "description": "Cour d'appel, tribunal de grande instance, justices de paix.",
+        "intitule": "Justice (1800-1940)",
+        "description": "Cour d'appel, tribunaux de grande instance, tribunaux d'instance, justices de paix, juridictions commerciales et prud'homales.",
         "periode": "XIXe-XXe siècle",
         "color": "",
         "instruments": [
@@ -2513,15 +2513,15 @@
         ]
       },
       "V": {
-        "intitule": "Cultes",
-        "description": "Bureau des cultes, execution des lois de séparation, congrégations religieuses.",
+        "intitule": "Cultes (an VIII-1958)",
+        "description": "Bureau des cultes : culte catholique, cultes protestant et israélite, séparation des Églises et de l'État.",
         "periode": "An VIII-1958",
         "color": "",
         "instruments": []
       },
       "W": {
-        "intitule": "Archives contemporaines",
-        "description": "Fonds d'archives produits par les administrations publiques à partir de 1940 (période contemporaine). Le cadre de classement W est organisé par versements thématiques.",
+        "intitule": "Archives postérieures au 10 juillet 1940 (archives contemporaines)",
+        "description": "Versements des administrations de l'État et du département à partir de 1940, organisés par numéro d'ordre. Inclut services préfectoraux, services déconcentrés, juridictions, établissements publics.",
         "periode": "1940-present",
         "color": "",
         "instruments": [
@@ -13621,22 +13621,22 @@
         }
       },
       "X": {
-        "intitule": "Assistance et prévoyance",
-        "description": "Bureaux de bienfaisance, hospices, œuvres sociales, assistance publique, mutualité.",
+        "intitule": "Assistance et prévoyance sociale (1800-1940)",
+        "description": "Bureaux de bienfaisance, hospices, sociétés de secours mutuel, assurances sociales, œuvres et associations caritatives.",
         "periode": "XIXe-XXe siècle",
         "color": "",
         "instruments": []
       },
       "Y": {
-        "intitule": "Camps d'internement",
-        "description": "Camps d'internement de la Première Guerre mondiale.",
+        "intitule": "Établissements pénitentiaires (1800-1940)",
+        "description": "Prisons départementales, maisons d'arrêt, maisons centrales, colonies pénitentiaires.",
         "periode": "1914-1918",
         "color": "",
         "instruments": []
       },
       "Z": {
-        "intitule": "Fonds des tribunaux administratif et cours administratives d'appel",
-        "description": "Tribunal administratif, cour administrative d'appel.",
+        "intitule": "Sous-préfectures et tribunaux administratifs",
+        "description": "Fonds des sous-préfectures (Aix, Arles, Istres) et des juridictions administratives (tribunal administratif, cour administrative d'appel).",
         "periode": "XXe siècle",
         "color": "",
         "instruments": []
@@ -13645,20 +13645,20 @@
   },
   "series_speciales": {
     "hd": {
-      "intitule": "Archives hospitalières déposées",
+      "intitule": "Archives hospitalières (HD)",
       "description": "Fonds des hôpitaux et établissements de santé déposés aux Archives départementales.",
       "color": "",
       "instruments": []
     },
     "e_etp": {
-      "intitule": "Archives notariales et établissements publics",
-      "description": "Fonds des études notariales et établissements publics gérés en série E.",
+      "intitule": "Archives notariales et établissements publics (E / ETP)",
+      "description": "Fonds des études notariales (sous-série E) et des établissements publics gérés en série E.",
       "color": "",
       "instruments": []
     },
     "fi": {
-      "intitule": "Fonds iconographiques",
-      "description": "Documents graphiques, photographies, cartes postales, affiches.",
+      "intitule": "Fonds iconographiques et audiovisuels (Fi)",
+      "description": "Documents graphiques, photographies, cartes postales, affiches, films.",
       "color": "",
       "instruments": [
         {
@@ -13728,7 +13728,7 @@
     },
     "etp": {
       "intitule": "Établissements publics (ETP)",
-      "description": "Fonds d'établissements publics : poudrerie, observatoire, manufactures, école centrale, etc.",
+      "description": "Fonds des établissements publics : observatoire, manufactures, école centrale, poudrerie, chambres consulaires.",
       "color": "#f687b3",
       "instruments": [
         {
