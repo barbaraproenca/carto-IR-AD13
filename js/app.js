@@ -27,7 +27,7 @@ class AD13Cartography {
     this.buildHierarchy();
     this.buildSeriesButtons();
     this.renderStats();
-    this.createCirclePack();
+    this.createTreemap();
     this.createBarChart();
     this.setupEventListeners();
     this.updateResults();
@@ -355,7 +355,110 @@ class AD13Cartography {
   }
 
 
-  createCirclePack() {
+  createTreemap() {
+    // Treemap D3 avec compression douce (puissance 0.55) sur les comptes :
+    // équivalent carré du circle pack précédent. W reste le plus grand bloc
+    // mais les autres séries restent visibles et cliquables.
+    const container = document.getElementById('sunburst');
+    if (!container) return;
+    d3.select(container).selectAll('*').remove();
+
+    const W = 480, H = 480;
+    const POWER = 0.55;
+
+    const root = d3.hierarchy(this.hierarchy)
+      .sum(d => Math.pow(d.value || 0, POWER))
+      .sort((a, b) => b.value - a.value);
+
+    d3.treemap()
+      .size([W, H])
+      .paddingOuter(d => d.depth === 0 ? 0 : 4)
+      .paddingTop(d => d.depth === 1 ? 18 : 2)
+      .paddingInner(2)
+      .round(true)
+      .tile(d3.treemapSquarify.ratio(1))(root);
+
+    const svg = d3.select(container).append('svg')
+      .attr('viewBox', `0 0 ${W} ${H}`)
+      .attr('width', '100%').attr('height', '100%')
+      .style('font', '11px Roboto, sans-serif');
+
+    const tip = document.getElementById('tooltip');
+    const series = root.children || [];
+
+    const seriesG = svg.selectAll('g.serie').data(series).join('g')
+      .attr('class', 'serie')
+      .attr('transform', d => `translate(${d.x0},${d.y0})`);
+
+    // Cadre série
+    seriesG.append('rect')
+      .attr('width', d => d.x1 - d.x0)
+      .attr('height', d => d.y1 - d.y0)
+      .attr('rx', 4)
+      .attr('fill', d => d.data.color || '#718096')
+      .attr('fill-opacity', 0.18)
+      .attr('stroke', d => d.data.color || '#718096')
+      .attr('stroke-width', 1.5)
+      .style('cursor', 'pointer')
+      .on('mouseover', (e, d) => {
+        tip.innerHTML = `<strong>Série ${d.data.name}</strong> — ${d.data.fullName || ''}<br>${d.data._instrumentCount || 0} instrument(s)`;
+        tip.classList.add('visible');
+      })
+      .on('mousemove', (e) => {
+        tip.style.left = (e.clientX + 15) + 'px';
+        tip.style.top = (e.clientY - 10) + 'px';
+      })
+      .on('mouseout', () => tip.classList.remove('visible'))
+      .on('click', (e, d) => this.filterBySeries(d.data.name));
+
+    // Sous-blocs (thematiques / tranches)
+    const self = this;
+    series.forEach((s, i) => {
+      const sg = d3.select(seriesG.nodes()[i]);
+      const subs = (s.children || []);
+      const subG = sg.selectAll('g.sub').data(subs).join('g')
+        .attr('class', 'sub')
+        .attr('transform', d => `translate(${d.x0 - s.x0},${d.y0 - s.y0})`);
+
+      subG.append('rect')
+        .attr('width', d => d.x1 - d.x0)
+        .attr('height', d => d.y1 - d.y0)
+        .attr('rx', 2)
+        .attr('fill', d => d.data.color || s.data.color)
+        .attr('fill-opacity', 0.85)
+        .attr('stroke', '#fff').attr('stroke-width', 0.6)
+        .style('cursor', 'pointer')
+        .on('mouseover', (e, d) => {
+          tip.innerHTML = `<strong>${d.data.name}</strong><br>${d.data.fullName || d.data.description || ''}<br>${d.data.value || 1} IR`;
+          tip.classList.add('visible');
+        })
+        .on('mousemove', (e) => {
+          tip.style.left = (e.clientX + 15) + 'px';
+          tip.style.top = (e.clientY - 10) + 'px';
+        })
+        .on('mouseout', () => tip.classList.remove('visible'))
+        .on('click', (e) => { e.stopPropagation(); self.filterBySeries(s.data.name); });
+    });
+
+    // Label nom de série en haut du bloc
+    seriesG.append('text')
+      .attr('x', 6).attr('y', 13)
+      .style('font-weight', '700')
+      .style('font-size', d => {
+        const w = d.x1 - d.x0;
+        return Math.max(10, Math.min(14, w / 6)) + 'px';
+      })
+      .style('fill', d => d.data.color || '#2d3748')
+      .style('pointer-events', 'none')
+      .text(d => {
+        const w = d.x1 - d.x0;
+        if (w < 24) return '';
+        const cnt = d.data._instrumentCount || 0;
+        return `${d.data.name}${cnt && w > 60 ? '  · ' + cnt + ' IR' : ''}`;
+      });
+  }
+
+  _unusedCirclePack() {
     // Circle packing avec compression douce (puissance ~0.55) sur les comptes :
     // les séries dominantes (W) restent les plus grosses bulles mais les petites
     // séries gardent une surface visible et cliquable.
