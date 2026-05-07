@@ -28,7 +28,7 @@ class AD13Cartography {
     this.buildSeriesButtons();
     this.buildThemeList();
     this.renderStats();
-    this.createSunburst();
+    this.createCirclePack();
     this.createBarChart();
     this.setupEventListeners();
     this.updateResults();
@@ -255,7 +255,8 @@ class AD13Cartography {
       const s = this.data.series_speciales[key];
       const node = {
         name: key.toUpperCase(), fullName: s.intitule,
-        description: s.description, color: s.color, children: []
+        description: s.description, color: s.color, children: [],
+        _instrumentCount: (s.instruments || []).length
       };
       const insts = s.instruments || [];
       if (insts.length > 12) {
@@ -384,78 +385,103 @@ class AD13Cartography {
     this.updateResults();
   }
 
-  createSunburst() {
+  createCirclePack() {
+    // Circle packing avec compression douce (puissance ~0.55) sur les comptes :
+    // les séries dominantes (W) restent les plus grosses bulles mais les petites
+    // séries gardent une surface visible et cliquable.
     const container = document.getElementById('sunburst');
-    const width = 460, height = 460;
-    const radius = Math.min(width, height) / 2;
+    if (!container) return;
     d3.select(container).selectAll('*').remove();
 
-    const svg = d3.select(container)
-      .append('svg')
-      .attr('viewBox', `0 0 ${width} ${height}`)
+    const W = 480, H = 480;
+    const svg = d3.select(container).append('svg')
+      .attr('viewBox', `0 0 ${W} ${H}`)
       .attr('width', '100%').attr('height', '100%')
-      .append('g')
-      .attr('transform', `translate(${width/2}, ${height/2})`);
+      .style('font', '11px Roboto, sans-serif');
 
+    const POWER = 0.55; // compression : 1 = linéaire, 0.5 = sqrt
+
+    // Construction d'un arbre 2 niveaux: AD13 -> Séries -> sous-groupes (buckets)
     const root = d3.hierarchy(this.hierarchy)
-      .sum(d => d.value || 0)
+      .sum(d => Math.pow(d.value || 0, POWER))
       .sort((a, b) => b.value - a.value);
 
-    d3.partition().size([2 * Math.PI, radius])(root);
+    const pack = d3.pack().size([W - 4, H - 4]).padding(d => d.depth === 1 ? 4 : 2);
+    pack(root);
 
-    const arc = d3.arc()
-      .startAngle(d => d.x0).endAngle(d => d.x1)
-      .padAngle(0.005).padRadius(radius / 2)
-      .innerRadius(d => d.y0).outerRadius(d => d.y1 - 1);
+    const tip = document.getElementById('tooltip');
+    const g = svg.append('g').attr('transform', 'translate(2,2)');
 
-    const tooltip = document.getElementById('tooltip');
+    // racine invisible
+    // niveau 1 : séries
+    const series = root.children || [];
+    const seriesG = g.selectAll('g.serie').data(series).join('g')
+      .attr('class', 'serie')
+      .attr('transform', d => `translate(${d.x},${d.y})`);
 
-    svg.selectAll('path')
-      .data(root.descendants().filter(d => d.depth))
-      .join('path')
-      .attr('d', arc)
+    seriesG.append('circle')
+      .attr('r', d => d.r)
       .attr('fill', d => d.data.color || '#718096')
-      .attr('fill-opacity', d => d.depth === 1 ? 0.95 : (d.depth === 2 ? 0.75 : 0.55))
-      .attr('stroke', '#fff')
-      .attr('stroke-width', 0.8)
+      .attr('fill-opacity', 0.18)
+      .attr('stroke', d => d.data.color || '#718096')
+      .attr('stroke-width', 1.5)
       .style('cursor', 'pointer')
-      .on('mouseover', (event, d) => {
-        tooltip.innerHTML = `<strong>${d.data.name}</strong><br>${d.data.fullName || d.data.description || ''}`;
-        tooltip.classList.add('visible');
-        d3.select(event.currentTarget).attr('fill-opacity', 1);
+      .on('mouseover', (e, d) => {
+        tip.innerHTML = `<strong>Série ${d.data.name}</strong> — ${d.data.fullName || ''}<br>${d.data._instrumentCount || d.value} instrument(s)`;
+        tip.classList.add('visible');
       })
-      .on('mousemove', (event) => {
-        tooltip.style.left = (event.clientX + 15) + 'px';
-        tooltip.style.top = (event.clientY - 10) + 'px';
+      .on('mousemove', (e) => {
+        tip.style.left = (e.clientX + 15) + 'px';
+        tip.style.top = (e.clientY - 10) + 'px';
       })
-      .on('mouseout', (event, d) => {
-        tooltip.classList.remove('visible');
-        d3.select(event.currentTarget).attr('fill-opacity', d.depth === 1 ? 0.95 : (d.depth === 2 ? 0.75 : 0.55));
-      })
-      .on('click', (event, d) => {
-        if (d.depth === 1) this.filterBySeries(d.data.name);
-        else if (d.depth >= 2 && !d.children) this.showInstrument(d.data);
-      });
+      .on('mouseout', () => tip.classList.remove('visible'))
+      .on('click', (e, d) => this.filterBySeries(d.data.name));
 
-    // labels series
-    svg.selectAll('text.serie-lbl')
-      .data(root.descendants().filter(d => d.depth === 1 && (d.x1 - d.x0) > 0.12))
-      .join('text')
-      .attr('class', 'serie-lbl')
-      .attr('transform', d => {
-        const a = (d.x0 + d.x1) / 2 - Math.PI / 2;
-        const r = (d.y0 + d.y1) / 2;
-        return `rotate(${a * 180/Math.PI}) translate(${r},0) ${a > Math.PI/2 ? 'rotate(180)' : ''}`;
-      })
-      .attr('text-anchor', 'middle').attr('dy', '0.35em')
-      .style('font-size', '11px').style('font-weight', '700').style('fill', '#fff')
+    // niveau 2 : sous-groupes
+    series.forEach(s => {
+      const subG = d3.select(seriesG.nodes()[series.indexOf(s)]).selectAll('g.sub')
+        .data(s.children || []).join('g')
+        .attr('class', 'sub')
+        .attr('transform', d => `translate(${d.x - s.x},${d.y - s.y})`);
+
+      subG.append('circle')
+        .attr('r', d => d.r)
+        .attr('fill', d => d.data.color || s.data.color)
+        .attr('fill-opacity', 0.85)
+        .attr('stroke', '#fff').attr('stroke-width', 0.8)
+        .style('cursor', 'pointer')
+        .on('mouseover', (e, d) => {
+          const cnt = d.data.value || 1;
+          tip.innerHTML = `<strong>${d.data.name}</strong><br>${d.data.fullName || d.data.description || ''}<br>${cnt} IR`;
+          tip.classList.add('visible');
+        })
+        .on('mousemove', (e) => {
+          tip.style.left = (e.clientX + 15) + 'px';
+          tip.style.top = (e.clientY - 10) + 'px';
+        })
+        .on('mouseout', () => tip.classList.remove('visible'))
+        .on('click', (e, d) => {
+          e.stopPropagation();
+          this.filterBySeries(s.data.name);
+        });
+    });
+
+    // labels: nom de série centré sur la bulle
+    seriesG.append('text')
+      .attr('text-anchor', 'middle')
+      .attr('dy', d => d.r > 30 ? -d.r + 14 : 4)
+      .style('font-weight', '700')
+      .style('font-size', d => Math.max(10, Math.min(18, d.r / 2.5)) + 'px')
+      .style('fill', d => d.data.color || '#2d3748')
       .style('pointer-events', 'none')
       .text(d => d.data.name);
 
-    svg.append('text')
-      .attr('text-anchor', 'middle').attr('dy', '0.35em')
-      .style('font-size', '12px').style('fill', '#718096')
-      .text('AD13');
+    // count badge
+    seriesG.filter(d => d.r > 22).append('text')
+      .attr('text-anchor', 'middle').attr('dy', d => d.r > 30 ? -d.r + 28 : 16)
+      .style('font-size', '9px').style('fill', '#4a5568')
+      .style('pointer-events', 'none')
+      .text(d => (d.data._instrumentCount || 0) + ' IR');
   }
 
   createBarChart() {
