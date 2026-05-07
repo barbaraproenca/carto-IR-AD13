@@ -366,9 +366,24 @@ class AD13Cartography {
     const W = 480, H = 480;
     const POWER = 0.55;
 
+    // Tri croissant par numéro de cote (ex: 1 W, 5 W, 76 W, 100-499 W, ...).
+    // Pour les séries (niveau 1), tri alphabétique du code (A, B, C, ...).
+    const numFromName = (name) => {
+      const m = (name || '').match(/^\s*(\d+)/);
+      return m ? parseInt(m[1], 10) : Infinity;
+    };
     const root = d3.hierarchy(this.hierarchy)
       .sum(d => Math.pow(d.value || 0, POWER))
-      .sort((a, b) => b.value - a.value);
+      .sort((a, b) => {
+        // niveau 1 (séries) : ordre alphabétique du code
+        if (a.depth === 1 && b.depth === 1) {
+          return (a.data.name || '').localeCompare(b.data.name || '');
+        }
+        // niveaux internes : ordre numérique du numéro de cote
+        const na = numFromName(a.data.name), nb = numFromName(b.data.name);
+        if (na !== nb) return na - nb;
+        return (a.data.name || '').localeCompare(b.data.name || '');
+      });
 
     d3.treemap()
       .size([W, H])
