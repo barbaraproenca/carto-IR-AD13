@@ -388,7 +388,11 @@ class AD13Cartography {
     d3.treemap()
       .size([W, H])
       .paddingOuter(d => d.depth === 0 ? 0 : 4)
-      .paddingTop(d => d.depth === 1 ? 18 : 2)
+      .paddingTop(d => {
+        if (d.depth !== 1) return 2;
+        const h = (d.y1 - d.y0) || 0;
+        return h < 24 ? 0 : 18; // pas de bandeau si le bloc est trop petit
+      })
       .paddingInner(2)
       .round(true)
       .tile(d3.treemapSquarify.ratio(1))(root);
@@ -455,21 +459,42 @@ class AD13Cartography {
         .on('click', (e) => { e.stopPropagation(); self.filterBySeries(s.data.name); });
     });
 
-    // Label nom de série en haut du bloc
+    // Label nom de série : toujours visible.
+    // - Si le bloc est assez large : label complet en haut à gauche
+    // - Sinon : juste le code de série centré, taille réduite
+    // - Si le bloc est très étroit : label tourné à 90°
     seriesG.append('text')
-      .attr('x', 6).attr('y', 13)
       .style('font-weight', '700')
-      .style('font-size', d => {
-        const w = d.x1 - d.x0;
-        return Math.max(10, Math.min(14, w / 6)) + 'px';
-      })
       .style('fill', d => d.data.color || '#2d3748')
       .style('pointer-events', 'none')
-      .text(d => {
-        const w = d.x1 - d.x0;
-        if (w < 24) return '';
+      .each(function(d) {
+        const w = d.x1 - d.x0, h = d.y1 - d.y0;
         const cnt = d.data._instrumentCount || 0;
-        return `${d.data.name}${cnt && w > 60 ? '  · ' + cnt + ' IR' : ''}`;
+        const t = d3.select(this);
+        if (w >= 50 && h >= 18) {
+          // label horizontal complet
+          t.attr('x', 6).attr('y', 13)
+            .style('font-size', Math.max(10, Math.min(14, w / 6)) + 'px')
+            .text(`${d.data.name}${cnt && w > 70 ? '  · ' + cnt + ' IR' : ''}`);
+        } else if (w >= 18 && h >= 14) {
+          // juste le code, centré
+          t.attr('x', w / 2).attr('y', Math.min(13, h / 2 + 4))
+            .attr('text-anchor', 'middle')
+            .style('font-size', Math.max(8, Math.min(11, Math.min(w, h) / 1.6)) + 'px')
+            .text(d.data.name);
+        } else if (h >= 18) {
+          // bloc étroit en hauteur : label vertical
+          t.attr('transform', `translate(${w / 2},${h / 2}) rotate(-90)`)
+            .attr('text-anchor', 'middle').attr('dy', '0.35em')
+            .style('font-size', Math.max(7, Math.min(10, h / 5)) + 'px')
+            .text(d.data.name);
+        } else {
+          // bloc minuscule : centrer en plus petit
+          t.attr('x', w / 2).attr('y', h / 2 + 3)
+            .attr('text-anchor', 'middle')
+            .style('font-size', Math.max(6, Math.min(9, Math.min(w, h) - 2)) + 'px')
+            .text(d.data.name);
+        }
       });
   }
 
